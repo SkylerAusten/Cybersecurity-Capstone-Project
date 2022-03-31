@@ -131,23 +131,23 @@ Now even though in the seccomp filter, the open syscall is blocked, we can still
 If you, as an attacker, are able to use the x32 syscall ABI then you will be able to use syscalls that have their x86_64 version blocked.">
 <meta name="keywords" content="">
 <meta name="robots" content="noodp">
-<link rel="canonical" href="http://localhost:1313/posts/x32_abi-post-1/">
+<link rel="canonical" href="/posts/x32_abi-post-1/">
 
 
 
 
-<link rel="stylesheet" href="http://localhost:1313/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css">
 
-  <link rel="stylesheet" href="http://localhost:1313/assets/pink.css">
-
-
+  <link rel="stylesheet" href="/assets/pink.css">
 
 
 
 
-<link rel="apple-touch-icon" href="http://localhost:1313/img/apple-touch-icon-192x192.png">
 
-  <link rel="shortcut icon" href="http://localhost:1313/img/favicon/pink.png">
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/pink.png">
 
 
 
@@ -160,10 +160,10 @@ If you, as an attacker, are able to use the x32 syscall ABI then you will be abl
 <meta property="og:title" content="X32_ABI SECCOMP Bypass using x32 syscall ABI">
 <meta property="og:description" content="Intro When a utilizing SECCOMP to protect a binary, it is important to block the x32 syscall ABI. This is done by default when using the libseccomp API. But when editing or manually creating a SECCOMP filter, it can be easier to leave out or misconfigure.
 If you, as an attacker, are able to use the x32 syscall ABI then you will be able to use syscalls that have their x86_64 version blocked.">
-<meta property="og:url" content="http://localhost:1313/posts/x32_abi-post-1/">
+<meta property="og:url" content="/posts/x32_abi-post-1/">
 <meta property="og:site_name" content="Capstone Project">
 
-  <meta property="og:image" content="http://localhost:1313/">
+  <meta property="og:image" content="/">
 
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
@@ -243,7 +243,7 @@ If you, as an attacker, are able to use the x32 syscall ABI then you will be abl
     
 <div class="post">
   <h1 class="post-title">
-    <a href="http://localhost:1313/posts/x32_abi-post-1/">X32_ABI SECCOMP Bypass using x32 syscall ABI</a></h1>
+    <a href="/posts/x32_abi-post-1/">X32_ABI SECCOMP Bypass using x32 syscall ABI</a></h1>
   <div class="post-meta">
     
       <span class="post-date">
@@ -430,7 +430,7 @@ p<span class="token punctuation">.</span>interactive<span class="token punctuati
     <div class="pagination__buttons">
         
         <span class="button previous">
-            <a href="http://localhost:1313/posts/x32_abi_challenge-post-1/">
+            <a href="/posts/x32_abi_challenge-post-1/">
                 <span class="button__icon">←</span>
                 <span class="button__text">X32_abi_Challenge</span>
             </a>
@@ -462,8 +462,8 @@ p<span class="token punctuation">.</span>interactive<span class="token punctuati
   </div>
 </footer>
 
-<script src="http://localhost:1313/assets/main.js"></script>
-<script src="http://localhost:1313/assets/prism.js"></script>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
 
 
 
