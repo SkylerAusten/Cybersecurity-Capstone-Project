@@ -59,23 +59,23 @@ Although, we only have an example for an off-by-one vulnerability on the stack, 
 <meta name="description" content="Intro We have already seen that being able overflow a buffer can lead to a full compromise. But up till now, we have been able to overflow many bytes, fully controlling the instruction pointer and having room to place a ROP chain or shellcode. But what if you can only overflow a single byte? It sounds like it would be impossible to exploit this which so little control over the program, but in some cases one byte is all you need.">
 <meta name="keywords" content="">
 <meta name="robots" content="noodp">
-<link rel="canonical" href="http://localhost:1313/posts/off-by-one/">
+<link rel="canonical" href="/posts/off-by-one/">
 
 
 
 
-<link rel="stylesheet" href="http://localhost:1313/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css">
 
-  <link rel="stylesheet" href="http://localhost:1313/assets/pink.css">
-
-
+  <link rel="stylesheet" href="/assets/pink.css">
 
 
 
 
-<link rel="apple-touch-icon" href="http://localhost:1313/img/apple-touch-icon-192x192.png">
 
-  <link rel="shortcut icon" href="http://localhost:1313/img/favicon/pink.png">
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/pink.png">
 
 
 
@@ -87,10 +87,10 @@ Although, we only have an example for an off-by-one vulnerability on the stack, 
 <meta property="og:type" content="article">
 <meta property="og:title" content="Off-by-One Vulnerabilities">
 <meta property="og:description" content="Intro We have already seen that being able overflow a buffer can lead to a full compromise. But up till now, we have been able to overflow many bytes, fully controlling the instruction pointer and having room to place a ROP chain or shellcode. But what if you can only overflow a single byte? It sounds like it would be impossible to exploit this which so little control over the program, but in some cases one byte is all you need.">
-<meta property="og:url" content="http://localhost:1313/posts/off-by-one/">
+<meta property="og:url" content="/posts/off-by-one/">
 <meta property="og:site_name" content="Capstone Project">
 
-  <meta property="og:image" content="http://localhost:1313/">
+  <meta property="og:image" content="/">
 
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
@@ -170,7 +170,7 @@ Although, we only have an example for an off-by-one vulnerability on the stack, 
     
 <div class="post">
   <h1 class="post-title">
-    <a href="http://localhost:1313/posts/off-by-one/">Off-by-One Vulnerabilities</a></h1>
+    <a href="/posts/off-by-one/">Off-by-One Vulnerabilities</a></h1>
   <div class="post-meta">
     
       <span class="post-date">
@@ -231,7 +231,7 @@ Although, we only have an example for an off-by-one vulnerability on the stack, 
         
         
         <span class="button next">
-            <a href="http://localhost:1313/posts/x32_abi_challenge-post-1/">
+            <a href="/posts/x32_abi_challenge-post-1/">
                 <span class="button__text">X32_abi_Challenge</span>
                 <span class="button__icon">→</span>
             </a>
@@ -262,8 +262,8 @@ Although, we only have an example for an off-by-one vulnerability on the stack, 
   </div>
 </footer>
 
-<script src="http://localhost:1313/assets/main.js"></script>
-<script src="http://localhost:1313/assets/prism.js"></script>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
 
 
 
