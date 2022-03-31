@@ -132,23 +132,23 @@ p.interactive()
 #include &amp;lt;stdio.h&amp;gt;#include &amp;lt;sys/prctl.h&amp;gt;#include &amp;lt;linux/seccomp.h&amp;gt;#include &amp;lt;linux/filter.h&amp;gt; #define ARRAY_SIZE(array) (sizeof(array) / sizeof(array[0]))  int filter_syscalls() {  int ret = -1;   struct sock_filter code[] = {  /* op, jt, jf, k */  {0x20, 0x00, 0x00, 0x00000004}, // Verify x86_64 Arch  {0x15, 0x00, 0x09, 0xc000003e},  {0x20, 0x00, 0x00, 0x00000000},  {0x35, 0x06, 0x00, 0x40000000}, // Determine if using x86 syscall ABI | Bug: Jumps to ALLOW (relative jumps are hard).">
 <meta name="keywords" content="">
 <meta name="robots" content="noodp">
-<link rel="canonical" href="http://localhost:1313/posts/x32_abi_challenge-post-1/">
+<link rel="canonical" href="/posts/x32_abi_challenge-post-1/">
 
 
 
 
-<link rel="stylesheet" href="http://localhost:1313/assets/style.css">
+<link rel="stylesheet" href="/assets/style.css">
 
-  <link rel="stylesheet" href="http://localhost:1313/assets/pink.css">
-
-
+  <link rel="stylesheet" href="/assets/pink.css">
 
 
 
 
-<link rel="apple-touch-icon" href="http://localhost:1313/img/apple-touch-icon-192x192.png">
 
-  <link rel="shortcut icon" href="http://localhost:1313/img/favicon/pink.png">
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/pink.png">
 
 
 
@@ -161,10 +161,10 @@ p.interactive()
 <meta property="og:title" content="X32_abi_Challenge">
 <meta property="og:description" content="This program simply takes shellcode from the user and runs it.
 #include &amp;lt;stdio.h&amp;gt;#include &amp;lt;sys/prctl.h&amp;gt;#include &amp;lt;linux/seccomp.h&amp;gt;#include &amp;lt;linux/filter.h&amp;gt; #define ARRAY_SIZE(array) (sizeof(array) / sizeof(array[0]))  int filter_syscalls() {  int ret = -1;   struct sock_filter code[] = {  /* op, jt, jf, k */  {0x20, 0x00, 0x00, 0x00000004}, // Verify x86_64 Arch  {0x15, 0x00, 0x09, 0xc000003e},  {0x20, 0x00, 0x00, 0x00000000},  {0x35, 0x06, 0x00, 0x40000000}, // Determine if using x86 syscall ABI | Bug: Jumps to ALLOW (relative jumps are hard).">
-<meta property="og:url" content="http://localhost:1313/posts/x32_abi_challenge-post-1/">
+<meta property="og:url" content="/posts/x32_abi_challenge-post-1/">
 <meta property="og:site_name" content="Capstone Project">
 
-  <meta property="og:image" content="http://localhost:1313/">
+  <meta property="og:image" content="/">
 
 <meta property="og:image:width" content="2048">
 <meta property="og:image:height" content="1024">
@@ -244,7 +244,7 @@ p.interactive()
     
 <div class="post">
   <h1 class="post-title">
-    <a href="http://localhost:1313/posts/x32_abi_challenge-post-1/">X32_abi_Challenge</a></h1>
+    <a href="/posts/x32_abi_challenge-post-1/">X32_abi_Challenge</a></h1>
   <div class="post-meta">
     
       <span class="post-date">
@@ -373,7 +373,7 @@ p<span class="token punctuation">.</span>interactive<span class="token punctuati
         
         
         <span class="button next">
-            <a href="http://localhost:1313/posts/x32_abi-post-1/">
+            <a href="/posts/x32_abi-post-1/">
                 <span class="button__text">X32_ABI SECCOMP Bypass</span>
                 <span class="button__icon">→</span>
             </a>
@@ -404,8 +404,8 @@ p<span class="token punctuation">.</span>interactive<span class="token punctuati
   </div>
 </footer>
 
-<script src="http://localhost:1313/assets/main.js"></script>
-<script src="http://localhost:1313/assets/prism.js"></script>
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
 
 
 
