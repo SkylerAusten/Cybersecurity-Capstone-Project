@@ -4,31 +4,6 @@ body {
   color: #f0f0f0;
 }
 
-p {
-	font-size: 13pt;
-}
-
-.link:link {
-	color: #5647ae;
-}
-
-code {
-	background-color: #272822;
-	font-family: monospace;
-}
-
-pre code { 
-	font-size: 13pt;
-	background-color: #272822;
-	tab-size:4;
-	display: block;
-	white-space: pre;
-	-webkit-overflow-scrolling: touch;
-	max-width: 100%;
-	min-width: 100px;
-	padding: 5px;
-}
-
 .sidenav {
   height: 97%;
   width: 350px;
@@ -84,11 +59,4 @@ pre code {
 	box-sizing: border-box;
 	font-style: monospace;
 	width: 80%
-}
-
-.centered {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	display: block;
 }
