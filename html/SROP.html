@@ -1,0 +1,269 @@
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant="" defer=""></script>
+  
+    <title>SROP :: Capstone Project</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SROP Intro Sigreturn Oriented Programming (SROP) is an exploitation technique that takes advatange of a sigreturn to ultimatly control code execution.
+Signals To understand how/why SROP works, we first need to know about signals. A signal is a software interrupt delivered to a process. Depending of the signal, it will have vairous affects on the program. Most signals will halt program execution though. Without knowing it, you have most likely invoked many signals during daily use of your OS.">
+<meta name="keywords" content="">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="/posts/srop/">
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+  <link rel="stylesheet" href="/assets/pink.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/pink.png">
+
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SROP">
+<meta property="og:description" content="SROP Intro Sigreturn Oriented Programming (SROP) is an exploitation technique that takes advatange of a sigreturn to ultimatly control code execution.
+Signals To understand how/why SROP works, we first need to know about signals. A signal is a software interrupt delivered to a process. Depending of the signal, it will have vairous affects on the program. Most signals will halt program execution though. Without knowing it, you have most likely invoked many signals during daily use of your OS.">
+<meta property="og:url" content="/posts/srop/">
+<meta property="og:site_name" content="Capstone Project">
+
+  <meta property="og:image" content="/">
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2022-04-17 21:32:06 -0700 PDT">
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="pink">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Capstone Project
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger hidden">menu</div>
+    
+  </div>
+  
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/srop/">SROP</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2022-04-17
+        
+      </span>
+    
+    
+    
+  </div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="srop">SROP<a href="#srop" class="hanchor" arialabel="Anchor">⌗</a> </h1>
+<h2 id="intro">Intro<a href="#intro" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<p>Sigreturn Oriented Programming (SROP) is an exploitation technique that takes advatange of a sigreturn to ultimatly control code execution.</p>
+<h3 id="signals">Signals<a href="#signals" class="hanchor" arialabel="Anchor">⌗</a> </h3>
+<p>To understand how/why SROP works, we first need to know about signals. A signal is a software interrupt delivered to a process. Depending of the signal, it will have vairous affects on the program. Most signals will halt program execution though. Without knowing it, you have most likely invoked many signals during daily use of your OS. When you hit <code>ctrl + c</code> to kill a program, you are sending a <strong>SIGINT</strong> signal to the program. The default reaction to a <strong>SIGINT</strong> signal is killing the application. There are also synchronous singals like <strong>SIGSEGV</strong> and <strong>SIGABRT</strong> that you have probably seen during exploitation of buffer overflows.</p>
+<h3 id="signal-handlers">Signal Handlers<a href="#signal-handlers" class="hanchor" arialabel="Anchor">⌗</a> </h3>
+<p>All signals have some default behaviour. But a program can create a signal handler to alter the response to receiving certain signals. Have you ever tried to <code>ctrl + c</code> when using the GDB and nothing happened? That is because GDB catches the signal with a signal handler and does not choose to exit the program. A signal handler can be implemented like this:</p>
+<div class="highlight"><div class="code-toolbar"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;" class=" language-c"><code class=" language-c" data-lang="c"><span class="token keyword keyword-void">void</span> <span class="token function">signal_handler</span><span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> x<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"SIGINT received, but I'm not leaving!\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token function">signal</span><span class="token punctuation">(</span>SIGINT<span class="token punctuation">,</span> signal_handler<span class="token punctuation">)</span><span class="token punctuation">;</span>			<span class="token comment">// Register the handler</span>
+	<span class="token keyword keyword-while">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div></div><p>This program enters an infinite loop, and when the user tries to kill the program with <code>ctrl + c</code>, it prints <strong>SIGINT received, but I’m not leaving!</strong> But how does this work? We know that when the program enters the infinite loop, it is stuck executing <code>jmp</code> over and over to itself. Something behind the scenes has to happen for it to suddenly shift code execution to the signal handler, then back to the infinite loop, when a signal is received.</p>
+<h3 id="the-internals">The Internals<a href="#the-internals" class="hanchor" arialabel="Anchor">⌗</a> </h3>
+<p>What happens hear is that the Kernel takes over and sets up the execution of the signal handler. Specifically, the Kernel pushes a <strong>signal frame (sigframe)</strong> to the stack in userspace that has all the information needed for the program to resume exectuion after the signal handler. This includes the values of general purpose registers, segment registers, floating-point registers, vector registers and alot more.</p>
+<p>This signal frame is defined at <a href="https://github.com/torvalds/linux/blob/master/arch/x86/include/asm/sigframe.h">/arch/x86/include/asm/sigframe.h</a></p>
+<div class="highlight"><div class="code-toolbar"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;" class=" language-c"><code class=" language-c" data-lang="c"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">rt_sigframe</span> <span class="token punctuation">{</span>
+	<span class="token keyword keyword-char">char</span> __user <span class="token operator">*</span>pretcode<span class="token punctuation">;</span>
+	<span class="token keyword keyword-struct">struct</span> <span class="token class-name">ucontext</span> uc<span class="token punctuation">;</span>
+	<span class="token keyword keyword-struct">struct</span> <span class="token class-name">siginfo</span> info<span class="token punctuation">;</span>
+	<span class="token comment">/* fp state follows here */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div></div><p>Since <code>rt_sigframe</code> has alot of nested memebers, we will only be going over the parts important for SROP. The first member of <code>rt_sigframe</code> is <code>char __user *pretcode</code> which is a function pointer to <code>__restore_rt</code> which has the following code:</p>
+<pre tabindex="0"><code>&lt;__restore_rt&gt;:		mov    rax,0xf
+&lt;__restore_rt+7&gt;:	syscall
+</code></pre><p>Syscall 0xf is <code>rt_sigreturn</code>. This sounds familiar, seems like it will be important in SROP. The <a href="https://man7.org/linux/man-pages/man2/sigreturn.2.html">man page</a> for <code>rt_sigreturn</code> explains it best:</p>
+<blockquote>
+<p>If the Linux kernel determines that an unblocked signal is
+pending for a process, then, at the next transition back to user
+mode in that process (e.g., upon return from a system call or
+when the process is rescheduled onto the CPU), it creates a new
+frame on the user-space stack where it saves various pieces of
+process context (processor status word, registers, signal mask,
+and signal stack settings).
+The kernel also arranges that, during the transition back to user
+mode, the signal handler is called, and that, upon return from
+the handler, control passes to a piece of user-space code
+commonly called the “signal trampoline”. The signal trampoline
+code in turn calls sigreturn().
+This sigreturn() call undoes everything that was done—changing
+the process’s signal mask, switching signal stacks (see
+sigaltstack(2))—in order to invoke the signal handler. Using the
+information that was earlier saved on the user-space stack
+sigreturn() restores the process’s signal mask, switches stacks,
+and restores the process’s context (processor flags and
+registers, including the stack pointer and instruction pointer),
+so that the process resumes execution at the point where it was
+interrupted by the signal.</p>
+</blockquote>
+<p><code>rt_sigreturn</code> is responsible for resuming program execution after the signal handler. The next member of the <code>rt_sigframe</code> that we will look at is <code>struct ucontext uc</code>. It is defined at <a href="https://github.com/torvalds/linux/blob/master/include/uapi/asm-generic/ucontext.h">l/include/uapi/asm-generic/ucontext.h</a></p>
+<div class="highlight"><div class="code-toolbar"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;" class=" language-c"><code class=" language-c" data-lang="c"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">ucontext</span> <span class="token punctuation">{</span>
+   <span class="token keyword keyword-unsigned">unsigned</span> <span class="token keyword keyword-long">long</span> uc_flags<span class="token punctuation">;</span>
+   <span class="token keyword keyword-struct">struct</span> <span class="token class-name">ucontext</span> <span class="token operator">*</span>uc_link<span class="token punctuation">;</span>
+   <span class="token class-name">stack_t</span> uc_stack<span class="token punctuation">;</span>
+   <span class="token keyword keyword-struct">struct</span> <span class="token class-name">sigcontext</span> uc_mcontext<span class="token punctuation">;</span>
+   <span class="token class-name">sigset_t</span> uc_sigmask<span class="token punctuation">;</span> <span class="token comment">/* mask last for extensibility */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div></div><p>And we are interested in <code>struct sigcontext uc_mcontext;</code> as it holds all the general pupose registers which we will be using during exploitation. It is defined at <a href="https://github.com/torvalds/linux/blob/master/arch/x86/include/uapi/asm/sigcontext.h">/arch/x86/include/uapi/asm/sigcontext.h</a></p>
+<div class="highlight"><div class="code-toolbar"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;" class=" language-c"><code class=" language-c" data-lang="c"><span class="token keyword keyword-struct">struct</span> <span class="token class-name">sigcontext</span> <span class="token punctuation">{</span>
+   __u64 r8<span class="token punctuation">;</span>
+   __u64 r9<span class="token punctuation">;</span>
+   __u64 r10<span class="token punctuation">;</span>
+   __u64 r11<span class="token punctuation">;</span>
+   __u64 r12<span class="token punctuation">;</span>
+   __u64 r13<span class="token punctuation">;</span>
+   __u64 r14<span class="token punctuation">;</span>
+   __u64 r15<span class="token punctuation">;</span>
+   __u64 rdi<span class="token punctuation">;</span>
+   __u64 rsi<span class="token punctuation">;</span>
+   __u64 rbp<span class="token punctuation">;</span>
+   __u64 rbx<span class="token punctuation">;</span>
+   __u64 rdx<span class="token punctuation">;</span>
+   __u64 rax<span class="token punctuation">;</span>
+   __u64 rcx<span class="token punctuation">;</span>
+   __u64 rsp<span class="token punctuation">;</span>
+   __u64 rip<span class="token punctuation">;</span>
+   __u64 eflags<span class="token punctuation">;</span> <span class="token comment">/* RFLAGS */</span>
+   __u16 cs<span class="token punctuation">;</span>
+   __u16 gs<span class="token punctuation">;</span>
+   __u16 fs<span class="token punctuation">;</span>
+   <span class="token keyword keyword-union">union</span> <span class="token punctuation">{</span>
+   	__u16 ss<span class="token punctuation">;</span> <span class="token comment">/* If UC_SIGCONTEXT_SS */</span>
+   	__u16 __pad0<span class="token punctuation">;</span> <span class="token comment">/* Alias name for old (!UC_SIGCONTEXT_SS) user-space */</span>
+   <span class="token punctuation">}</span><span class="token punctuation">;</span>
+   __u64 err<span class="token punctuation">;</span>
+   __u64 trapno<span class="token punctuation">;</span>
+   __u64 oldmask<span class="token punctuation">;</span>
+   __u64 cr2<span class="token punctuation">;</span>
+   <span class="token keyword keyword-struct">struct</span> <span class="token class-name">_fpstate</span> __user <span class="token operator">*</span>fpstate<span class="token punctuation">;</span> <span class="token comment">/* Zero when no FPU context */</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div></div><p>When <code>rt_sigreturn</code> is called, the kernel takes these values from the stack in userspace and places them into their respective registers (not all the memebers of <code>sigcontext</code> are register values).</p>
+<p>All of this combined is how the kernel and program go about invoking a signal handler when needed.</p>
+<h2 id="exploitation">Exploitation<a href="#exploitation" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<p>Since there are no checks in place that verify that the sigframe was created by the kernel, could it be possible to forge a sigframe then call <code>rt_sigreturn</code>? That would be a really powerful because it would allow an attacker to controll every register allowing them to have alot of control of code execution. And this is exactly what SROP is.</p>
+<p>With a BOF, we can place a fake sigframe on the stack with the <code>sigcontext</code> struct containing the register values that we would like, then call <code>rt_sigreturn</code> to pop all those values into the appropriate registers, shifting code execution to whatever the attacker wants.</p>
+
+      </div></div>
+
+  
+  
+<div class="pagination">
+    <div class="pagination__title">
+        <span class="pagination__title-h">Read the Challenge Writeup</span>
+        <hr>
+    </div>
+    <div class="pagination__buttons">
+        
+        
+        <span class="button next">
+            <a href="/SROP-challenge.html">
+                <span class="button__text">SROP Challenge</span>
+                <span class="button__icon">→</span>
+            </a>
+        </span>
+        
+    </div>
+</div>
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+</body></html>

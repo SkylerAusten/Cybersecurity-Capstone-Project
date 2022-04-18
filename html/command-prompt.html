@@ -1,0 +1,195 @@
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant="" defer=""></script>
+  
+    <title>Command Prompt :: Capstone Project</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Command Prompt and PowerShell What are command prompt and PowerShell Command prompt was first introduced in Windows to automate routine tasks, like user account management or nightly backups.[^1] What does this mean for the average user? It means that people want access to command prompt because it has access to some of the most critical parts of your computer’s infrastructure. In most instances, programs run through command prompt won’t do much damage unless the goal of achieving administrative privileges has been achieved when a user has admin, also known as the root, privileges.">
+<meta name="keywords" content="">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="/posts/command-prompt/">
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+  <link rel="stylesheet" href="/assets/pink.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/pink.png">
+
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Command Prompt">
+<meta property="og:description" content="Command Prompt and PowerShell What are command prompt and PowerShell Command prompt was first introduced in Windows to automate routine tasks, like user account management or nightly backups.[^1] What does this mean for the average user? It means that people want access to command prompt because it has access to some of the most critical parts of your computer’s infrastructure. In most instances, programs run through command prompt won’t do much damage unless the goal of achieving administrative privileges has been achieved when a user has admin, also known as the root, privileges.">
+<meta property="og:url" content="/posts/command-prompt/">
+<meta property="og:site_name" content="Capstone Project">
+
+  <meta property="og:image" content="/">
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2022-04-17 20:48:48 -0700 PDT">
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="pink">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Capstone Project
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger hidden">menu</div>
+    
+  </div>
+  
+
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/command-prompt/">Command Prompt</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2022-04-17
+        
+      </span>
+    
+    
+    
+  </div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="command-prompt-and-powershell">Command Prompt and PowerShell<a href="#command-prompt-and-powershell" class="hanchor" arialabel="Anchor">⌗</a> </h1>
+<h2 id="what-are-command-prompt-and-powershell">What are command prompt and PowerShell<a href="#what-are-command-prompt-and-powershell" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<p>Command prompt was first introduced in Windows to automate routine tasks, like user account management or nightly backups.[^1] What does this mean for the average user? It means that people want access to command prompt because it has access to some of the most critical parts of your computer’s infrastructure. In most instances, programs run through command prompt won’t do much damage unless the goal of achieving administrative privileges has been achieved when a user has admin, also known as the root, privileges. They can do a lot of damage.</p>
+<p>To illustrate some of the damage that a command prompt can do, you can check for all incoming and outgoing connections to your computer using simple commands. If a computer wants your information, you can use a PowerShell script to run an ipconfig and store the results in a document, then have that document sent to a specific IP address. If you’re the attacker, it’s more than likely your IP address.</p>
+<h2 id="why-is-using-command-prompt-necessary">Why is using Command Prompt necessary?<a href="#why-is-using-command-prompt-necessary" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<p>Most programs that use some form of automation can do so easily by implementing simple PowerShell scripts. Companies use PowerShell for administrative purposes, and with the advent of cloud services, most commands that deal with administrative duties are executed through PowerShell commands. For instance, you can download cmdlets, applications to be used in tandem with PowerShell, to monitor and gain access to information concerning every single Outlook file attached to your organization’s workspace.</p>
+<p>Several commands allow you to access critical information about your computer’s mechanical operations. Such commands include:</p>
+<ul>
+<li>HKEY_CLASSES_ROOT (HKCR) defines which applications are executed when a file is opened and contains information such as user interface information.[^2]</li>
+<li>HKEY_CURRENT_USER defines the currently logged-on user, including the folder, display, and control panel settings.[^3] This could be devastating if a bad actor wanted to steal a file from you and needed to know the path to set up a PowerShell script to open, copy, and send the file.</li>
+</ul>
+<p>These are just a few of the commands at the CMD application’s disposal and the PowerShell application, with more being found at <a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands">Microsoft</a>.</p>
+<h2 id="what-are-root-files">What are root files<a href="#what-are-root-files" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<pre><code>Root files are the core of any computer, and they contain files that pertain to system instructions and give definitions to the applications that can run. Why does it asks you where you want to install a program? Generally, it’s a path that the program executes from. CMD and PowerShell allow you to alter that path, see where files are located, and what files run. The programs will run in something akin to a file path “C:/WINDOWS for most Windows computers.” Don’t believe me? Try these steps:
+</code></pre>
+<ul>
+<li>Look at the start or the use of search</li>
+<li>Type CMD or cmd</li>
+<li>In the space that opens in the new window, type echo %SYSTEMROOT%</li>
+</ul>
+<p>Assuming your computer is set up like every default computer, it should display something akin to C:/WINDOWS or C:/Windows. In that location, files such as System and System 32 exist and run all the programs tied to the computer that run system programs and interact with everything connected to your computer.</p>
+<p>For Linux, you can essentially do the same thing, but the hierarchy for Linux computers is more robust and separated, making it harder to intrude on Linux-based systems. The tree structure for a Linux root file system looks like this:</p>
+<ul>
+<li>/etc - This directory contains the files generally used in system administration and can include host and password information.[^4]</li>
+<li>/bin - This one is co-linked with /sbin and contains the files needed to mount and boot the machine. Editing these operations can get someone access to your hard drive or give them the ability to mount their own![^5]</li>
+<li>/dev - This cheeky devil contains the particular files for local devices, including but not limited to tape drives, printers, disk partitions, and terminals![^6]</li>
+</ul>
+<h2 id="do-all-malicious-codes-act-through-this">Do all malicious codes act through this?<a href="#do-all-malicious-codes-act-through-this" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<p>No, but they can! More viruses come through in the form of rootkits, designed to have administrative control over your computer.</p>
+<h3 id="what-is-a-rootkit">What is a rootkit?<a href="#what-is-a-rootkit" class="hanchor" arialabel="Anchor">⌗</a> </h3>
+<p>There are multiple types of rootkits[^7]:</p>
+<ul>
+<li>Hardware or firmware rootkits are designed to affect your hard drive, router, or system’s BIOS. This rootkit is what keyloggers use to monitor online activity and log your keystrokes.</li>
+<li>Bootloader rootkits are responsible for replacing what boots your computer with a malicious file and can lock you out of your computer.</li>
+<li>Memory rootkits are hidden in your RAM and use your computer to carry out malicious code until the next reset.</li>
+</ul>
+<p>A famous example of a rootkit is the Stuxnet rootkit that struck in 2010 and was the first-ever perceived cyberweapon ever created.[^8]</p>
+<h1 id="works-cited">Works Cited<a href="#works-cited" class="hanchor" arialabel="Anchor">⌗</a> </h1>
+<p>[^1]Gerend, J. (2022, January 4). Windows commands. Windows commands | Microsoft Docs. Retrieved April 14, 2022, from <a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/windows-commands</a></p>
+<p>[^2][^3]Cook, K. D., &amp; Shashidhar, N. (2018). Using PowerShell to Capture and Compare Windows Registry and Live Memory Artifacts with Online Databases to Identify Suspect Files. International Journal of Information Security Science, 7(2), 78–89.</p>
+<p>[^4][^5][^6]IBM. (2021, December 3). Root File System. Root File System. Retrieved April 14, 2022, from <a href="https://www.ibm.com/docs/pl/aix/7.1?topic=tree-root-file-system">https://www.ibm.com/docs/pl/aix/7.1?topic=tree-root-file-system</a></p>
+<p>[^7][^8]Kaspersky. (2022, March 9). What is rootkit – definition and explanation. <a href="https://www.kaspersky.com">www.kaspersky.com</a>. Retrieved April 14, 2022, from <a href="https://www.kaspersky.com/resource-center/definitions/what-is-rootkit">https://www.kaspersky.com/resource-center/definitions/what-is-rootkit</a></p>
+
+      </div></div>
+
+  
+  
+
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+</body></html>
