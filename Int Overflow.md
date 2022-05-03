@@ -16,6 +16,7 @@ https://www.youtube.com/watch?v=PK_yguLapgA
 
 To see an integer overflow in action, check out the following C code: 
 
+```c
     void read_flag() {
       FILE *f = fopen("flag.txt", "r");
       if(!f) {
@@ -57,13 +58,14 @@ To see an integer overflow in action, check out the following C code:
         printf("Error!  Exiting the program...\n");
        return 0;
     }
+```
 The compiled version of this binary is located in **~/home/integer_overflow/**.  From the source code, we can see the goal is to set the program's "warp factor" to 10, but the maximum input the program will accept is 9.  ***Or is it?***
 
 Check out the variable declarations at the beginning of the `main()` function.
-
+```c
        short current = 2;
        short maximum = 9;
        short newFactor;
        int entered;
-
+```
 **Notice anything unusual?**  See if you can find a way to circumvent the size check against the user’s input to retrieve the flag.
