@@ -6,7 +6,9 @@ Strings is an incredibly powerful tool when analyzing executables and object fil
 
 For example, to search through the strings in a file that contain the text "libc," you might run the following command.
  
-```bash strings file.txt | grep libc```
+```bash
+strings file.txt | grep libc
+```
 
 ## String Options
 
