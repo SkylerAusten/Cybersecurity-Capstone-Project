@@ -91,7 +91,7 @@ figure.right {
  margin-left:auto
 }
 figure figcaption {
- background:#ee72f1;
+ background:#5647ae;
  background:var(--accent);
  color:#21202c;
  color:var(--background);
@@ -112,7 +112,7 @@ code,
 kbd {
  font-feature-settings:normal;
  background:rgba(238,114,241,.2);
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  font-family:Fira Code,Monaco,Consolas,Ubuntu Mono,monospace!important;
  font-size:.95rem;
@@ -160,9 +160,9 @@ pre code {
  padding:0
 }
 blockquote {
- border-bottom:1px solid #ee72f1;
+ border-bottom:1px solid #5647ae;
  border-bottom:1px solid var(--accent);
- border-top:1px solid #ee72f1;
+ border-top:1px solid #5647ae;
  border-top:1px solid var(--accent);
  margin:40px 0;
  padding:25px
@@ -187,7 +187,7 @@ blockquote p {
  position:relative
 }
 blockquote p:first-of-type:before {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  content:">";
  display:block;
@@ -196,7 +196,7 @@ blockquote p:first-of-type:before {
 }
 blockquote.twitter-tweet {
  background:rgba(238,114,241,.1);
- border:1px solid #ee72f1;
+ border:1px solid #5647ae;
  border:1px solid var(--accent);
  color:inherit;
  font:inherit;
@@ -214,7 +214,7 @@ blockquote.twitter-tweet:before {
 }
 blockquote.twitter-tweet:before,
 blockquote.twitter-tweet a {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent)
 }
 table {
@@ -226,12 +226,12 @@ table {
 table,
 td,
 th {
- border:1px dashed #ee72f1;
+ border:1px dashed #5647ae;
  border:1px dashed var(--accent);
  padding:10px
 }
 th {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent)
 }
 ol,
@@ -263,7 +263,7 @@ ol li {
  counter-increment:li
 }
 ol li:before {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  content:counter(li);
  display:inline-block;
@@ -281,7 +281,7 @@ ol ol li:before {
  content:counters(li,".") " "
 }
 mark {
- background:#ee72f1;
+ background:#5647ae;
  background:var(--accent);
  color:#21202c;
  color:var(--background)
@@ -361,7 +361,7 @@ sup {
  flex:1
 }
 .header__logo:after {
- background:repeating-linear-gradient(90deg,#ee72f1,#ee72f1 2px,transparent 0,transparent 10px);
+ background:repeating-linear-gradient(90deg,#5647ae,#5647ae 2px,transparent 0,transparent 10px);
  background:repeating-linear-gradient(90deg,var(--accent),var(--accent) 2px,transparent 0,transparent 10px);
  content:"";
  display:block;
@@ -491,7 +491,7 @@ sup {
  z-index:99
 }
 .header .menu__sub-inner-more-trigger {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  cursor:pointer;
  -webkit-user-select:none;
@@ -513,7 +513,7 @@ sup {
  position:relative
 }
 .header .menu .language-selector-current {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  cursor:pointer;
  display:flex;
@@ -537,7 +537,7 @@ sup {
 }
 .header .menu-trigger {
  border:2px solid;
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  height:100%;
  margin-left:10px;
@@ -546,7 +546,7 @@ sup {
 }
 .logo {
  align-items:center;
- background:#ee72f1;
+ background:#5647ae;
  background:var(--accent);
  color:#000;
  display:flex;
@@ -633,7 +633,7 @@ sup {
  margin-top:20px
 }
 .framed {
- border:1px solid #ee72f1;
+ border:1px solid #5647ae;
  border:1px solid var(--accent);
  padding:20px
 }
@@ -674,7 +674,7 @@ sup {
 .post-title {
  --border:3px dotted var(--accent);
  border-bottom:var(--border);
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  margin:0 0 15px;
  padding-bottom:15px;
@@ -705,7 +705,7 @@ sup {
 }
 .post-cover {
  background:transparent;
- border:20px solid #ee72f1;
+ border:20px solid #5647ae;
  border:20px solid var(--accent);
  margin:40px 0;
  padding:20px
@@ -726,7 +726,7 @@ sup {
  list-style:none
 }
 .post ul li:not(:empty):before {
- color:#ee72f1;
+ color:#5647ae;
  color:var(--accent);
  content:"-";
  left:-20px;
@@ -777,7 +777,7 @@ h4:hover a {
 .token.url,
 code.language-css,
 code.language-scss {
- color:#ee72f1!important;
+ color:#5647ae!important;
  color:var(--accent)!important
 }
 .token.atrule-id,
@@ -905,7 +905,7 @@ pre[class*=language-] {
  --accent:#ffa86a;
  --phoneWidth:(max-width:684px);
  --tabletWidth:(max-width:900px);
- --accent:#ee72f1;
+ --accent:#5647ae;
  --background:#21202c;
  --color:#fff;
  --border-color:hsla(0,0%,100%,0.1)
