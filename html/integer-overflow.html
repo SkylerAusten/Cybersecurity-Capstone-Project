@@ -1,0 +1,210 @@
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant="" defer=""></script>
+  
+    <title>Integer Overflow :: Capstone Project</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Integer Overflow In computing, an integer overflow results when a device attempts to store a numeric value that is outside of the range it can represent with a given number of digits. These overflows occur as the result of an integer operation does not fit within the allocated memory space. Instead of an error in the program, it usually causes the result to be unexpected.
+For an easy-to-understand example of an integer overflow, look at a mechanical odometer.">
+<meta name="keywords" content="">
+<meta name="robots" content="noodp">
+<link rel="canonical" href="/posts/integer-overflow/">
+
+
+
+
+<link rel="stylesheet" href="/assets/style.css">
+
+  <link rel="stylesheet" href="/assets/pink.css">
+
+
+
+
+
+
+<link rel="apple-touch-icon" href="/img/apple-touch-icon-192x192.png">
+
+  <link rel="shortcut icon" href="/img/favicon/pink.png">
+
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+<meta property="og:locale" content="en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Integer Overflow">
+<meta property="og:description" content="Integer Overflow In computing, an integer overflow results when a device attempts to store a numeric value that is outside of the range it can represent with a given number of digits. These overflows occur as the result of an integer operation does not fit within the allocated memory space. Instead of an error in the program, it usually causes the result to be unexpected.
+For an easy-to-understand example of an integer overflow, look at a mechanical odometer.">
+<meta property="og:url" content="/posts/integer-overflow/">
+<meta property="og:site_name" content="Capstone Project">
+
+  <meta property="og:image" content="/">
+
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+
+  <meta property="article:published_time" content="2022-05-05 17:13:00 -0700 PDT">
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body class="pink">
+
+
+<div class="container center headings--one-size">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Capstone Project
+  </div>
+</a>
+
+    </div>
+    
+      <div class="menu-trigger hidden">menu</div>
+    
+  </div>
+  
+
+  
+</header>
+
+
+  <div class="content">
+    
+<div class="post">
+  <h1 class="post-title">
+    <a href="/posts/integer-overflow/">Integer Overflow</a></h1>
+  <div class="post-meta">
+    
+      <span class="post-date">
+        2022-05-05
+        
+      </span>
+    
+    
+    
+  </div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <h1 id="integer-overflow">Integer Overflow<a href="#integer-overflow" class="hanchor" arialabel="Anchor">⌗</a> </h1>
+<p>In computing, an <strong>integer overflow</strong> results when a device attempts to store a numeric value that is outside of the range it can represent with a given number of digits.  These overflows occur as the result of an integer operation <strong>does not fit within the allocated memory space</strong>. Instead of an error in the program, it usually causes the result to be unexpected.</p>
+<p>For an easy-to-understand example of an integer overflow, look at a mechanical odometer.  The one in the included image can only count to 999,999.  After that, it <strong>rolls back around to 0</strong>.  The odometer is a physical device, but a similar effect can occur in computing if interger overflow bugs aren’t properly mitigated.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Odometer_rollover.jpg" alt="Integer overflow - Wikipedia"></p>
+<p>Integer overflows are the twelth most dangerous software error in the most recent <a href="https://cwe.mitre.org/top25/archive/2021/2021_cwe_top25.html">MITRE CWE Top 25</a> list, because of their ability to lead to <a href="https://www.acunetix.com/blog/web-security-zone/what-is-buffer-overflow/">buffer overflows</a>, which are currently the number 1 most dangerous software error according to that list.</p>
+<p>In 2015, an integer overflow vulnerability was found in Boeing’s 787 Dreamliner jets that had the potential to cause pilots to lose control of the aircraft. You can read more about this vulnerability <a href="https://s3.amazonaws.com/public-inspection.federalregister.gov/2015-10066.pdf">from the FAA here</a>.  An integer overflow was also behnid the 1996 Ariane 5 rocket explosion.</p>
+<p><a href="https://www.youtube.com/watch?v=PK_yguLapgA">https://www.youtube.com/watch?v=PK_yguLapgA</a></p>
+<h2 id="integer-overflow-challenge">Integer Overflow Challenge<a href="#integer-overflow-challenge" class="hanchor" arialabel="Anchor">⌗</a> </h2>
+<p>To see an integer overflow in action, check out the following C code:</p>
+<div class="highlight"><div class="code-toolbar"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;" class=" language-c"><code class=" language-c" data-lang="c">    <span class="token keyword keyword-void">void</span> <span class="token function">read_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      FILE <span class="token operator">*</span>f <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"flag.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword keyword-if">if</span><span class="token punctuation">(</span><span class="token operator">!</span>f<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"Failed to read flag (are you running in the right directory?)\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">"(Also, make sure you are not running in a debugger, which drops privileges.)\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword keyword-char">char</span> flag<span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+      flag<span class="token punctuation">[</span><span class="token function">fread</span><span class="token punctuation">(</span>flag<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Nice! Here's your flag... \n%s\n"</span><span class="token punctuation">,</span> flag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword keyword-int">int</span> <span class="token function">main</span><span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword keyword-short">short</span> current <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-short">short</span> maximum <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-short">short</span> newFactor<span class="token punctuation">;</span>
+       <span class="token keyword keyword-int">int</span> entered<span class="token punctuation">;</span>
+    
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"   Warp Drive Status\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"-----------------------\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Current Warp Factor: %d\n"</span><span class="token punctuation">,</span> current<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Maximum Warp Factor: %d\n\n"</span><span class="token punctuation">,</span> maximum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Set New Warp Factor: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>entered<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+       newFactor <span class="token operator">=</span> entered<span class="token punctuation">;</span>
+       <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\nUpdated Warp Factor: %d\n\n"</span><span class="token punctuation">,</span> newFactor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+       <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>entered <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Sorry! The maximum warp factor is 9.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>newFactor <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Sorry! The maximum warp factor is 9.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>newFactor <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"That's not high enough! To get the flag, the warp factor needs to bet set to 10.\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-else">else</span> <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>newFactor <span class="token operator">==</span> <span class="token number">10</span><span class="token punctuation">)</span>
+        <span class="token function">read_flag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-else">else</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Error!  Exiting the program...\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-return">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div></div><p>The compiled version of this binary is located in <strong>~/home/integer_overflow/</strong>.  From the source code, we can see the goal is to set the program’s “warp factor” to 10, but the maximum input the program will accept is 9.  <em><strong>Or is it?</strong></em></p>
+<p>Check out the variable declarations at the beginning of the <code>main()</code> function.</p>
+<div class="highlight"><div class="code-toolbar"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;" class=" language-c"><code class=" language-c" data-lang="c">       <span class="token keyword keyword-short">short</span> current <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-short">short</span> maximum <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+       <span class="token keyword keyword-short">short</span> newFactor<span class="token punctuation">;</span>
+       <span class="token keyword keyword-int">int</span> entered<span class="token punctuation">;</span>
+</code></pre><div class="toolbar"><div class="toolbar-item"><button class="copy-to-clipboard-button" type="button" data-copy-state="copy"><span>Copy</span></button></div></div></div></div><p><strong>Notice anything unusual?</strong>  See if you can find a way to circumvent the size check against the user’s input to retrieve the flag.</p>
+
+      </div></div>
+
+  
+  
+
+  
+
+  
+  
+
+  
+</div>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2022 Powered by <a href="http://gohugo.io">Hugo</a></span>
+    
+        <span>:: Theme made by <a href="https://twitter.com/panr">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+<script src="/assets/main.js"></script>
+<script src="/assets/prism.js"></script>
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+</body></html>
